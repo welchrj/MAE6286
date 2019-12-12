@@ -6,6 +6,14 @@ import numpy
 from matplotlib import pyplot, cm
 from mpl_toolkits import mplot3d
 
+def ftcs_neumann(u0, sigma, nt):
+    '''FTCS with neumann conditions'''
+    u = u0.copy()
+    for i in range(nt):
+        u = u.copy()
+        u[1:-1] = u[1:-1] + sigma*(u[:-2] - 2*u[1:-1] + u[2:])
+        u[-1] = u[-2]
+    return u
 
 def laplace_solution(x, y, Lx, Ly):
     """
